@@ -9,7 +9,7 @@
  * @see https://github.com/vinkla/laravel-shield
  */
 
-declare(strict_types=1);
+//declare(strict_types=1);
 
 namespace Vinkla\Shield;
 
@@ -20,12 +20,12 @@ use Laravel\Lumen\Application as LumenApplication;
 
 class ShieldServiceProvider extends ServiceProvider
 {
-    public function boot(): void
+    public function boot()
     {
         $this->setupConfig();
     }
 
-    protected function setupConfig(): void
+    protected function setupConfig()
     {
         $source = realpath($raw = __DIR__ . '/../config/shield.php') ?: $raw;
 
@@ -38,7 +38,7 @@ class ShieldServiceProvider extends ServiceProvider
         $this->mergeConfigFrom($source, 'shield');
     }
 
-    public function register(): void
+    public function register()
     {
         $this->app->singleton('shield', function (Container $app) {
             $config = $app['config']['shield.users'];
@@ -52,7 +52,7 @@ class ShieldServiceProvider extends ServiceProvider
     /**
      * @return string[]
      */
-    public function provides(): array
+    public function provides()
     {
         return [
             'shield',

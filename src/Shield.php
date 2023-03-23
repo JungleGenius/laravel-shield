@@ -9,22 +9,22 @@
  * @see https://github.com/vinkla/laravel-shield
  */
 
-declare(strict_types=1);
+//declare(strict_types=1);
 
 namespace Vinkla\Shield;
 
 class Shield
 {
-    protected array $users;
+    protected $users;
 
-    protected string $currentUser;
+    protected $currentUser;
 
-    public function __construct(array $users = [])
+    public function __construct($users = [])
     {
         $this->users = $users;
     }
 
-    public function verify(?string $username, ?string $password, ?string $user = null): bool
+    public function verify($username, $password, $user = null)
     {
         if ($username === null || $password === null) {
             return false;
@@ -46,7 +46,7 @@ class Shield
         return false;
     }
 
-    protected function getUsers(string $user = null): array
+    protected function getUsers($user = null)
     {
         if ($user !== null) {
             return array_intersect_key($this->users, array_flip((array) $user));
@@ -55,7 +55,7 @@ class Shield
         return $this->users;
     }
 
-    public function getCurrentUser(): string
+    public function getCurrentUser()
     {
         return $this->currentUser;
     }

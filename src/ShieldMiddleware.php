@@ -9,7 +9,7 @@
  * @see https://github.com/vinkla/laravel-shield
  */
 
-declare(strict_types=1);
+//declare(strict_types=1);
 
 namespace Vinkla\Shield;
 
@@ -18,7 +18,7 @@ use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class ShieldMiddleware
 {
-    protected Shield $shield;
+    protected $shield;
 
     public function __construct(Shield $shield)
     {
@@ -30,7 +30,7 @@ class ShieldMiddleware
      * @throws \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException
      * @return mixed
      */
-    public function handle($request, Closure $next, ?string $user = null)
+    public function handle($request, Closure $next, $user = null)
     {
         if ($this->shield->verify($request->getUser(), $request->getPassword(), $user) === false) {
             throw new UnauthorizedHttpException('Basic');
